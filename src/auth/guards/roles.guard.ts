@@ -13,22 +13,24 @@ export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const roles: string[] = this.reflector.get(
+    const actions: string[] = this.reflector.get(
       META_ROLES,
       context.getHandler(),
     );
 
-    if (!roles) return true;
-    if (roles.length === 0) return true;
+    if (!actions) return true;
+    if (actions.length === 0) return true;
 
     const req = context.switchToHttp().getRequest();
     const user: User = req.user as User;
 
-    /* for (const rol of user.rol) {
-      if (roles.includes(rol.rolName)) {
+    for (const action of user.rol.actions) {
+      if (actions.includes(action.actionName)) {
         return true;
       }
-    } */
-    throw new ForbiddenException('user need a valid role: ' + roles);
+    }
+    throw new ForbiddenException(
+      'user need a valid role with action: ' + actions,
+    );
   }
 }

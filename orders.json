@@ -1,0 +1,49 @@
+{
+    "id": "34c778b5-ffcc-4168-9f35-662d0862be37",
+    "status": "status1",
+    "total": 10,
+    "discount": 0,
+    "time": "",
+    "table": {
+        "id": 2,
+        "number": "m1"
+    },
+    "item": [
+        {
+            "id": 17,
+            "amount": 1,
+            "food": {
+                "id": "b65b6e6e-e80c-42a6-8c20-05de1d253100",
+                "name": "food2",
+                "variant": []
+            }
+        },
+        {
+            "id": 18,
+            "amount": 1,
+            "food": {
+                "id": "b65b6e6e-e80c-42a6-8c20-05de1d253100",
+                "name": "food2",
+                "variant": []
+            }
+        }
+    ],
+    "user": {
+        "id": "6eb6e96e-b40e-4e11-b81d-3c724464cf5a",
+        "email": "mario@gmail.com",
+        "fullName": "Mario1",
+        "pin": "4321",
+        "cellPhone": "7856434",
+        "address": "calle Bolivar 123",
+        "urlImage": "https://res.cloudinary.com/dfx5ww1l1/image/upload/v1716506873/fx75zrzpbwlqbaahtomk.png",
+        "rol": {
+            "id": "1f51a029-0b68-422e-b068-43002a69a445",
+            "rolName": "rol_1"
+        }
+    },
+    "client": {
+        "id": "cb452021-3db3-4c37-8938-39a50b19e3a3",
+        "document": "12323",
+        "fullName": "Diego"
+    }
+}

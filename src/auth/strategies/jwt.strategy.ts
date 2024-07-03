@@ -8,6 +8,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { JwtPayload } from '../interfaces/jwt_payload.interface';
 import { User } from '../../users/entities/user.entity';
+import { Action } from '../entities/action.entity';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -24,7 +25,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
   validate(payload: JwtPayload) {
     const { id } = payload;
-    const user = this.userRepository.findOneBy({ id });
+    const user = this.userRepository.findOne({
+      where: { id },
+      relations: { rol: { actions: true } },
+    });
     if (!user) throw new UnauthorizedException('Token no valid');
 
     //? en la Request

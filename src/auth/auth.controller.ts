@@ -1,34 +1,65 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  ParseUUIDPipe,
+} from '@nestjs/common';
+
+import { PaginationDto } from '../common/dtos/pagination.dto';
+import {
+  CreateRolDto,
+  UpdateRolDto,
+  LoginUserDto,
+  LoginPinUserDto,
+} from './dto';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @Post('login')
+  login(@Body() loginUserDto: LoginUserDto) {
+    return this.authService.login(loginUserDto);
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
+  @Post('login-pin')
+  loginPin(@Body() loginPinUserDto: LoginPinUserDto) {
+    return this.authService.loginPin(loginPinUserDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
+  //! CRUD ROLES
+
+  @Post('rol')
+  create(@Body() createRolDto: CreateRolDto) {
+    return this.authService.create(createRolDto);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
+  @Get('rol')
+  findAll(@Query() paginationDto: PaginationDto) {
+    return this.authService.findAll(paginationDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @Get('rol/:id')
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
+    return this.authService.findOne(id);
+  }
+
+  @Patch('rol/:id')
+  update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateAuthDto: UpdateRolDto,
+  ) {
+    return this.authService.update(id, updateAuthDto);
+  }
+
+  @Delete('rol/:id')
+  remove(@Param('id', ParseUUIDPipe) id: string) {
+    return this.authService.remove(id);
   }
 }

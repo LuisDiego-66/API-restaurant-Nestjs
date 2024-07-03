@@ -1,8 +1,19 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { CategoriesModule } from './categories/categories.module';
+import { FoodsModule } from './foods/foods.module';
+import { TablesModule } from './tables/tables.module';
+import { SectionsModule } from './sections/sections.module';
+import { OrdersModule } from './orders/orders.module';
+import { ItemsModule } from './items/items.module';
+import { VariantsModule } from './variants/variants.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { ClientsModule } from './clients/clients.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -11,7 +22,7 @@ import { UsersModule } from './users/users.module';
     }),
 
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: 'mysql',
       host: process.env.DB_HOST,
       port: +process.env.DB_PORT,
       database: process.env.DB_NAME,
@@ -24,6 +35,26 @@ import { UsersModule } from './users/users.module';
     AuthModule,
 
     UsersModule,
+
+    CategoriesModule,
+
+    FoodsModule,
+
+    TablesModule,
+
+    SectionsModule,
+
+    OrdersModule,
+
+    ItemsModule,
+
+    VariantsModule,
+
+    CloudinaryModule,
+
+    ClientsModule,
+
+    SeedModule,
   ],
   controllers: [],
   providers: [],
